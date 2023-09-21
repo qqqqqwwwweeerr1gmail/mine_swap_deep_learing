@@ -1,4 +1,4 @@
-
+import time
 
 def new_row(row_num):
     #  rule  1
@@ -18,7 +18,8 @@ def new_env(row_num,col_num):
     for i in range(1, col_num):
         env.append(new_row(row_num))
     # print(env)
-    return env
+    env_time_stamp = int(time.time() * 1_000_000)
+    return env, env_time_stamp
 
 def raw_show(show_env, name=''):
     print(name + ' ...')

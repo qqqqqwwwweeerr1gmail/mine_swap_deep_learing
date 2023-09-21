@@ -15,7 +15,7 @@ def strategy_random_select(plob):
     return rs
 
 
-def sim_till_end(plob,actual_env):
+def sim_till_end_random(plob, actual_env):
     print('------------------sim_till_end----------------------')
     print_env(plob, name='before_select plob')
     a, b = strategy_random_select(plob)
@@ -33,7 +33,7 @@ def sim_till_end(plob,actual_env):
         print('game  successed  ...  ')
         return 1
     else:
-        return sim_till_end(plob,actual_env)
+        return sim_till_end_random(plob, actual_env)
 
 
 def random_play(row_num,col_num):
@@ -41,7 +41,7 @@ def random_play(row_num,col_num):
     raw_env = list(map(list, zip(*env)))
     actual_env = actual_env_4_raw(raw_env)
     plob = init_player_ob(actual_env)
-    sim_till_end(plob,actual_env)
+    sim_till_end_random(plob, actual_env)
 
 
 

@@ -1,1 +1,23 @@
-{"edr_value": {}}
+{
+  "edr_value": {
+    "1695279190160523": "{'edr_no': 1695279190160523, 'loaded': 100, 'observed': 45, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190174528": "{'edr_no': 1695279190174528, 'loaded': 100, 'observed': 20, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190196528": "{'edr_no': 1695279190196528, 'loaded': 100, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190223530": "{'edr_no': 1695279190223530, 'loaded': 100, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190245531": "{'edr_no': 1695279190245531, 'loaded': 100, 'observed': 4, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190315537": "{'edr_no': 1695279190315537, 'loaded': 100, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190412546": "{'edr_no': 1695279190412546, 'loaded': 100, 'observed': 4, 'correct': 2, 'correct_rate': 0.5}",
+    "1695279190822574": "{'edr_no': 1695279190822574, 'loaded': 100, 'observed': 45, 'correct': 12, 'correct_rate': 0.26666666666666666}",
+    "1695279190887580": "{'edr_no': 1695279190887580, 'loaded': 100, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279190953584": "{'edr_no': 1695279190953584, 'loaded': 100, 'observed': 53, 'correct': 46, 'correct_rate': 0.8679245283018868}",
+    "1695279190979585": "{'edr_no': 1695279190979585, 'loaded': 100, 'observed': 24, 'correct': 9, 'correct_rate': 0.375}",
+    "1695279191079594": "{'edr_no': 1695279191079594, 'loaded': 100, 'observed': 2, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279191100595": "{'edr_no': 1695279191100595, 'loaded': 100, 'observed': 8, 'correct': 8, 'correct_rate': 1.0}",
+    "1695279191127597": "{'edr_no': 1695279191127597, 'loaded': 100, 'observed': 5, 'correct': 0, 'correct_rate': 0.0}",
+    "1695279191155600": "{'edr_no': 1695279191155600, 'loaded': 100, 'observed': 9, 'correct': 7, 'correct_rate': 0.7777777777777778}",
+    "1695279191220606": "{'edr_no': 1695279191220606, 'loaded': 100, 'observed': 1, 'correct': 1, 'correct_rate': 1.0}",
+    "1695279191350614": "{'edr_no': 1695279191350614, 'loaded': 100, 'observed': 25, 'correct': 12, 'correct_rate': 0.48}",
+    "1695279191799650": "{'edr_no': 1695279191799650, 'loaded': 100, 'observed': 25, 'correct': 10, 'correct_rate': 0.4}",
+    "1695279191909655": "{'edr_no': 1695279191909655, 'loaded': 100, 'observed': 24, 'correct': 0, 'correct_rate': 0.0}"
+  }
+}
