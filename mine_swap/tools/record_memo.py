@@ -25,7 +25,7 @@ def random_play_batch(row_num, col_num, init_reward=0, episode=1000):
 
 
 def play_batch(row_num, col_num, init_reward=0, episode=1000,record_flag=False,memo_path='memo.json'):
-    total_reward = init_reward
+    batch_reward = reward = init_reward
     episode = episode
     for i in range(episode):
         print('=-----------------' + str(i) + '  episode=-----------------')
@@ -36,9 +36,9 @@ def play_batch(row_num, col_num, init_reward=0, episode=1000,record_flag=False,m
         actual_env = actual_env_4_raw(raw_env)
         plob = init_player_ob(actual_env)
         # print(plob)
-        reward = sim_till_end(plob, actual_env,env_time_stamp, record_flag=record_flag,memo_path=memo_path)
-        total_reward += reward
-    return total_reward
+        reward = sim_till_end(plob, actual_env,env_time_stamp, reward,record_flag=record_flag,memo_path=memo_path)
+        batch_reward += reward
+    return batch_reward
 
 
 def value2rate(col_num, plob_ima, re_sim_dict_flag=False):
@@ -78,13 +78,15 @@ def select_rate(re_rate_dict):
 
 
 def record2memo(memo_path, actual_env, env_time_stamp, plob, knowledge_no, suspect_no, re_rate_dict, action,
-                beneficial):
+                step,beneficial,reward):
     content = [{"plob": plob,
                 "knowledge_no": knowledge_no,
                 "suspect_current_no": suspect_no,
                 "re_rate_dict": {str(k): v for k, v in re_rate_dict.items()},
                 "action": str(action),
-                "beneficial": beneficial}]
+                "step": step,
+                "beneficial": beneficial,
+                "reward": reward}]
 
     all_content = {"actual_env": actual_env,
                    "env_time_stamp": env_time_stamp,
@@ -149,7 +151,7 @@ def value_by_conjecture(plob, knowledge_no,edr_path='edr.json',knowledge_path='k
     return re_sim_dict
 
 
-def sim_till_end(plob,actual_env,env_time_stamp, record_flag=False, conjecture=False,knowledge_no='',suspect_no='',memo_path='memo.json'):
+def sim_till_end(plob,actual_env,env_time_stamp, reward, step=1,record_flag=False, conjecture=False,knowledge_no='',suspect_no='',memo_path='memo.json'):
     """ simulate one game , until get reward """
     plob_ima = init_value(plob)
     col_num = len(plob[0])
@@ -166,29 +168,32 @@ def sim_till_end(plob,actual_env,env_time_stamp, record_flag=False, conjecture=F
     continue_flag = True
     success_reward = 0
     failure_reward = -1
-    total_reward = 0
+    # total_reward = 0
 
     if actual_env[a][b] == '*':
         continue_flag = False
         # print('game  over  ...  ')
         # raw_show(actual_env, 'actual_env')
         beneficial = failure_reward
-        total_reward += beneficial
+        reward += beneficial
 
     elif sum([str(x).count('?') for y in plob for x in y]) == len(plob[0]):
         continue_flag = False
         # print('game  successed  ...  ')
         beneficial = success_reward
-        total_reward += beneficial
+        reward += beneficial
+    else:
+        pass
 
     if record_flag:
         record2memo(memo_path, actual_env, env_time_stamp, plob, knowledge_no, suspect_no, re_rate_dict, action,
-                    beneficial)
+                    step,beneficial,reward)
 
     if continue_flag:
-        total_reward = sim_till_end(plob, actual_env,env_time_stamp, record_flag=record_flag, conjecture=conjecture,knowledge_no=knowledge_no,suspect_no=suspect_no,memo_path=memo_path)
+        step+=1
+        reward = sim_till_end(plob, actual_env,env_time_stamp, reward,step,record_flag=record_flag, conjecture=conjecture,knowledge_no=knowledge_no,suspect_no=suspect_no,memo_path=memo_path)
 
-    return total_reward
+    return reward
 
 
 if __name__ == '__main__':
