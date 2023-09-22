@@ -1,14 +1,13 @@
 import json,random
 import math
 
-
-def get_last_knowledge_no(knowledge_path):
+def get_last_knowledge_no(knowledge_path='knowledge.json'):
     with open(knowledge_path) as f:
         d = json.load(f)
     return list(d['knowledge'].keys())[-1]
 
 
-def get_all_last_plob(memo_path):
+def get_all_last_plob(memo_path='memo.json'):
     with open(memo_path) as f:
         d = json.load(f)
     all_last_plob = [x['content'][-1]['plob'] for x in d['record']]

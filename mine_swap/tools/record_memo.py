@@ -2,7 +2,7 @@ from mine_swap.tools.create_env import new_env, actual_env_4_raw, print_env, ini
 from mine_swap.tools.random_play import sim_till_end_random
 from mine_swap.tools.init_func import init_value
 from mine_swap.tools.token_func import get_n_k,get_n_s
-from mine_swap.tools.read_json import read_edr,read_theme,read_knowledge,read_edr_value
+from mine_swap.tools.read_json import read_edr,read_memo,read_knowledge,read_edr_value
 from mine_swap.tools.suspect import po_plus_dire,edr_value
 import json, time
 
@@ -24,10 +24,11 @@ def random_play_batch(row_num, col_num, init_reward=0, episode=1000):
     return total_reward
 
 
-def play_batch(row_num, col_num, init_reward=0, episode=1000,record_flag=False,memo_path='memo.json'):
+def play_batch(row_num, col_num, init_reward=0, episode=1000,record_flag=False,memo_path='memo.json',conjecture=False,knowledge_no=''):
     batch_reward = reward = init_reward
     episode = episode
     for i in range(episode):
+        reward = init_reward
         print('=-----------------' + str(i) + '  episode=-----------------')
         env, env_time_stamp = new_env(row_num, col_num)
         # print(env)
@@ -36,7 +37,7 @@ def play_batch(row_num, col_num, init_reward=0, episode=1000,record_flag=False,m
         actual_env = actual_env_4_raw(raw_env)
         plob = init_player_ob(actual_env)
         # print(plob)
-        reward = sim_till_end(plob, actual_env,env_time_stamp, reward,record_flag=record_flag,memo_path=memo_path)
+        reward = sim_till_end(plob, actual_env,env_time_stamp, reward,record_flag=record_flag,memo_path=memo_path,conjecture=conjecture,knowledge_no=knowledge_no)
         batch_reward += reward
     return batch_reward
 
@@ -90,7 +91,6 @@ def record2memo(memo_path, actual_env, env_time_stamp, plob, knowledge_no, suspe
 
     all_content = {"actual_env": actual_env,
                    "env_time_stamp": env_time_stamp,
-
                    "content": content}
     try:
         with open(memo_path) as f:
@@ -118,10 +118,10 @@ def record2memo(memo_path, actual_env, env_time_stamp, plob, knowledge_no, suspe
 def value_by_conjecture(plob, knowledge_no,edr_path='edr.json',knowledge_path='knowledge.json'):
     """stratige based on knowledge"""
 
-    d_edr = read_edr()
+    d_edr = read_edr(edr_path)
     print(d_edr)
 
-    d_knowledge = read_knowledge()
+    d_knowledge = read_knowledge(knowledge_path)
     print(d_knowledge)
 
     plob_ima = [[y + str(1) if y.startswith('?') else y for y in x] for x in plob]
@@ -144,7 +144,7 @@ def value_by_conjecture(plob, knowledge_no,edr_path='edr.json',knowledge_path='k
         arr = [k for k, v in re_sim_dict.items() if v == key_num]
         print(arr)
         for position in arr:
-            position = po_plus_dire(position, direction)
+            position = po_plus_dire(len(plob),len(plob[0]),position, direction)
             if position:
                 re_sim_dict = edr_value(re_sim_dict, position, mine_rate)
                 print(re_sim_dict)
@@ -157,7 +157,7 @@ def sim_till_end(plob,actual_env,env_time_stamp, reward, step=1,record_flag=Fals
     col_num = len(plob[0])
     if conjecture:
         re_sim_dict = value_by_conjecture(plob, knowledge_no)
-        re_rate_dict, re_rate_select = value2rate(col_num,re_sim_dict, re_sim_dict_flag=True)
+        re_rate_dict, re_rate_select = value2rate(col_num,plob_ima = re_sim_dict, re_sim_dict_flag=True)
         a, b = action = select_rate(re_rate_dict)
 
     else:

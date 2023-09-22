@@ -1,6 +1,4 @@
-def po_plus_dire(position, direction):
-    global col_num
-    global row_num
+def po_plus_dire(row_num ,col_num,position, direction):
 
     for d in direction:
         if d == 'd':

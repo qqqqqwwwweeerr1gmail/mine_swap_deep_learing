@@ -1,0 +1,18 @@
+{
+  "edr_value": {
+    "1695348286680390": "{'edr_no': 1695348286680390, 'loaded': 2439, 'observed': 250, 'correct': 250, 'correct_rate': 1.0}",
+    "1695348286741381": "{'edr_no': 1695348286741381, 'loaded': 2439, 'observed': 403, 'correct': 403, 'correct_rate': 1.0}",
+    "1695348287521441": "{'edr_no': 1695348287521441, 'loaded': 2439, 'observed': 167, 'correct': 167, 'correct_rate': 1.0}",
+    "1695348287594444": "{'edr_no': 1695348287594444, 'loaded': 2439, 'observed': 680, 'correct': 345, 'correct_rate': 0.5073529411764706}",
+    "1695348288146487": "{'edr_no': 1695348288146487, 'loaded': 2439, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695348288218494": "{'edr_no': 1695348288218494, 'loaded': 2439, 'observed': 1247, 'correct': 1044, 'correct_rate': 0.8372093023255814}",
+    "1695348288324509": "{'edr_no': 1695348288324509, 'loaded': 2439, 'observed': 468, 'correct': 145, 'correct_rate': 0.30982905982905984}",
+    "1695348288416521": "{'edr_no': 1695348288416521, 'loaded': 2439, 'observed': 116, 'correct': 83, 'correct_rate': 0.7155172413793104}",
+    "1695348288507526": "{'edr_no': 1695348288507526, 'loaded': 2439, 'observed': 49, 'correct': 49, 'correct_rate': 1.0}",
+    "1695348288605535": "{'edr_no': 1695348288605535, 'loaded': 2439, 'observed': 0, 'correct': 0, 'correct_rate': 0.0}",
+    "1695348288694526": "{'edr_no': 1695348288694526, 'loaded': 2439, 'observed': 505, 'correct': 188, 'correct_rate': 0.3722772277227723}",
+    "1695348288780532": "{'edr_no': 1695348288780532, 'loaded': 2439, 'observed': 187, 'correct': 187, 'correct_rate': 1.0}",
+    "1695348289517587": "{'edr_no': 1695348289517587, 'loaded': 2439, 'observed': 337, 'correct': 174, 'correct_rate': 0.516320474777448}",
+    "1695348290857686": "{'edr_no': 1695348290857686, 'loaded': 2439, 'observed': 67, 'correct': 34, 'correct_rate': 0.5074626865671642}"
+  }
+}

@@ -30,7 +30,7 @@ def read_edr_value():
 #     return focus_plob
 
 
-def read_theme(memo_path, num):
+def read_memo(memo_path, num):
     focus_plob = []
 
     with open(memo_path) as f:

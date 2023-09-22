@@ -88,7 +88,7 @@ def count_cheractor(env, row, col):
     #  up
     if row > 0 and env[row - 1][col] == 0:
         k += 1
-    return ' ' + character[k] + ' '
+    return str(character[k])
 
 def init_player_ob(actual_env):
     plob = [['?' for x in y] for y in actual_env]
