@@ -17,7 +17,7 @@ def po_plus_dire(row_num ,col_num,position, direction):
         return
 
 
-def edr_value(re_sim_dict, position, mine_rate):
+def value_f_edr(re_sim_dict, position, mine_rate):
     re_sim_dict[position] = '?' + str(1 - float(mine_rate))
     return re_sim_dict
 

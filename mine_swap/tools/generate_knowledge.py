@@ -139,10 +139,8 @@ def read_edr_value(edr_value_path='edr_value.json'):
 
 
 def write_knowledge(edr_no_ls,knowledge_time,knowledge_path='knowledge.json'):
-
     with open(knowledge_path) as f:
         d = json.load(f)
-
     k_r = {str(knowledge_time): edr_no_ls}
     print(k_r)
     d['knowledge'].update(k_r)

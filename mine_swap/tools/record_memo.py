@@ -3,7 +3,7 @@ from mine_swap.tools.random_play import sim_till_end_random
 from mine_swap.tools.init_func import init_value
 from mine_swap.tools.token_func import get_n_k,get_n_s
 from mine_swap.tools.read_json import read_edr,read_memo,read_knowledge,read_edr_value
-from mine_swap.tools.suspect import po_plus_dire,edr_value
+from mine_swap.tools.suspect import po_plus_dire,value_f_edr
 import json, time
 
 
@@ -57,12 +57,20 @@ def value2rate(col_num, plob_ima, re_sim_dict_flag=False):
         k, '#' + str(float(v[1:]) / sum_value * mine_count)) if v.startswith('?') else (k, v) for k, v in
                         re_sim_dict.items())
 
-    re_rate_select = dict((k, '#' + str(float(1 / unknow_num))) if sum_value == 0 else
-                          (k, '#' + str(float(v[1:]) / sum_value)) if v.startswith('?') else (k, v) for k, v in
-                          re_sim_dict.items())
-    re_rate_select = dict(
-        (k, '#10000000000') if v == '#0.0' else (k, '#' + str(1 / float(v[1:]))) if v[0] == '#' else (k, v) for (k, v)
-        in re_rate_select.items())
+    # re_rate_select = dict((k, '#' + str(float(1 / unknow_num))) if sum_value == 0 else
+    #                       (k, '#' + str(float(v[1:]) / sum_value)) if v.startswith('?') else (k, v) for k, v in
+    #                       re_sim_dict.items())
+    # re_rate_select = dict(
+    #     (k, '#10000000000') if v == '#0.0' else (k, '#' + str(1 / float(v[1:]))) if v[0] == '#' else (k, v) for (k, v)
+    #     in re_rate_select.items())
+
+    # normalization
+    explore_rate = 0
+    select_rate_all = [float(r[1:]) if r.startswith('#') else explore_rate for r in re_rate_dict.values()]
+    sum_rate = sum(select_rate_all)
+    select_rate_all_norm = [r/sum_rate for r in select_rate_all]
+    re_rate_select = dict((k, '#' + str(float(v[1:]) / sum_rate)) if v.startswith('#') else (k, v) for k, v in
+                          re_rate_dict.items())
 
     return re_rate_dict, re_rate_select
 
@@ -143,10 +151,10 @@ def value_by_conjecture(plob, knowledge_no,edr_path='edr.json',knowledge_path='k
 
         arr = [k for k, v in re_sim_dict.items() if v == key_num]
         print(arr)
-        for position in arr:
-            position = po_plus_dire(len(plob),len(plob[0]),position, direction)
-            if position:
-                re_sim_dict = edr_value(re_sim_dict, position, mine_rate)
+        for position_base in arr:
+            position_forcast = po_plus_dire(len(plob),len(plob[0]),position_base, direction)
+            if position_forcast:
+                re_sim_dict = value_f_edr(re_sim_dict, position_forcast, mine_rate)
                 print(re_sim_dict)
     return re_sim_dict
 
@@ -158,11 +166,11 @@ def sim_till_end(plob,actual_env,env_time_stamp, reward, step=1,record_flag=Fals
     if conjecture:
         re_sim_dict = value_by_conjecture(plob, knowledge_no)
         re_rate_dict, re_rate_select = value2rate(col_num,plob_ima = re_sim_dict, re_sim_dict_flag=True)
-        a, b = action = select_rate(re_rate_dict)
+        a, b = action = select_rate(re_rate_select)
 
     else:
         re_rate_dict, re_rate_select = value2rate(col_num,plob_ima)
-        a, b = action = select_rate(re_rate_dict)
+        a, b = action = select_rate(re_rate_select)
     plob[a][b] = actual_env[a][b]
     beneficial = 0
     continue_flag = True
